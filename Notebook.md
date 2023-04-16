@@ -93,3 +93,4 @@ WHERE Manufacturer='Apple';  - Например, удалим строки, у �
 ```postgresql
 DROP TABLE (имя таблицы);
 ```
+### END
