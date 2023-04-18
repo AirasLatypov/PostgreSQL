@@ -12,35 +12,58 @@ DATE - Дата.
 ```
 
 ## Запросы. SELECT.
+### **- Выводит все поля таблицы.**
 
 ```postgresql
-SELECT * FROM table; * - Выводит все поля таблицы.
-
-SELECT (название поля) FROM table; - Выводит запрошенное поле таблицы.
-
-SELECT (название поля) AS (новое название поля) FROM table; - Меняет название поля при выводе таблицы.
-
-SELECT DISTINCT (название поля) FROM table; - Объединение дублей.
-
-SELECT COUNT (название поля) FROM table; - Подсчет строк полей.
-
-SELECT COUNT (DISTINCT название поля) FROM table; - Объеденить дубли и подсчитать количество строк.
-
+SELECT * FROM table; 
+```
+### **- Выводит запрошенное поле таблицы.**
+```postgresql
+SELECT (название поля) FROM table;
+```
+### **AS - Меняет название поля при выводе таблицы.**
+```postgresql
+SELECT (название поля) AS (новое название поля) FROM table; 
+```
+### **DISTINCT - Объединение дублей.**
+```postgresql
+SELECT DISTINCT (название поля) FROM table; 
+```
+### **COUNT - Подсчет строк полей.**
+```postgresql
+SELECT COUNT (название поля) FROM table; 
+```
+### **- Объеденить дубли и подсчитать количество строк.**
+```postgresql
+SELECT COUNT (DISTINCT название поля) FROM table; 
+```
+### **WHERE - Фильтрация(условие) вывода данных. (AND, OR, IN, NOT, LIKE, BETWEEN, IS, <, > , =)**
+```postgresql
 SELECT (название поля) FROM table
-WHERE city = 'Ufa'; - Оператор WHERE условие вывода данных. (AND, OR, IN, NOT, LIKE, BETWEEN, IS, <, > , =)
-
+WHERE city = 'Ufa';
+```
+### **BETWEEN - Интервал (20 - 40) вклчительно.**
+```postgresql
 SELECT * FROM table
-WHERE (название поля) BETWEEN 20 AND 40; - Оператор BETWEEN интервал (20 - 40) вклчительно.
-
+WHERE (название поля) BETWEEN 20 AND 40; 
+```
+### **IN - можно просто перечислить через запятую нужные данные для вывода.**
+```postgresql
 SELECT * FROM table
-WHERE country IN ('Mexico', 'USA', 'Russia'); - С оператор IN  можно просто перечислить через запятую нужные данные для вывода.
-
+WHERE country IN ('Mexico', 'USA', 'Russia'); 
+```
+### **NOT - исключить из выводимых данных.**
+```postgresql
 SELECT * FROM table
-WHERE country NOT IN ('USA'); - Оператор NOT исключить из выводимых данных.
-
+WHERE country NOT IN ('USA'); 
+```
+### **ORDER BY - сортировка (ASC - по возрастанию, DESC - по убыванию).**
+```postgresql
 SELECT * FROM table
-ORDER BY (название поля) ASC или DESC; Оператор ORDER BY сортировка (ASC - по возрастанию, DESC - по убыванию).
-
+ORDER BY (название поля) ASC или DESC; 
+```
+### **MIN, MAX, AVG, SUM**
+```postgresql
 SELECT MIN (поле) FROM table; - MIN минимальное значение в выбранном поле.
 SELECT MAX (поле) FROM table; - MAX максимальное значение в выбранном поле.
 SELECT AVG (поле) FROM table; - AVG среднее значение в выбранном поле.
@@ -71,12 +94,12 @@ CREATE TABLE customers
 ```
 ### INSERT INTO. Добавление данных в таблицу.
 ```postgresql
-INSERT INTO customers (FirstName, LastName, Email, Age) VALUES ('Имя', 'Фамилия', 'Электронный адрес', Возраст)
+INSERT INTO customers (FirstName, LastName, Email, Age) VALUES ('Имя', 'Фамилия', 'Электронный адрес', Возраст);
 Можно еще так:
 INSERT INTO customers VALUES 
 ('Имя', 'Фамилия', 'Электронный адрес', Возраст)
 ('Имя', 'Фамилия', 'Электронный адрес', Возраст)
-('Имя', 'Фамилия', 'Электронный адрес', Возраст)
+('Имя', 'Фамилия', 'Электронный адрес', Возраст);
 ```
 
 ### ALTER TABLE. Добавление поля в таблицу.
@@ -135,5 +158,35 @@ WHERE           - Условие 1.
 GROUP BY        - Группировка.
 HAVING          - Условие 2. HAVING всегда после GROUP BY и перед ORDER BY.
 ORDER BY        - Сортировка.
+```
+### UNION. Объединение.
+```postgresql
+Объединение по одинаковым полям. Выводит все страны с обоих таблиц.
+
+SELECT country          - Выбор поля.
+FROM customers          - Название таблицы.         
+UNION                   - Объединение 2х таблиц. Без дубликатов. UNION ALL - дубликаты остаются.         
+SELECT country          - Выбор поля.
+FROM employee;          - Название таблицы.
+```
+### INTERSECT. Пересечение.
+```postgresql
+Объединение по одинаковым полям. Выводит только те страны, которые присутствуют в обоих таблицах.
+
+SELECT country          - Выбор поля.
+FROM customers          - Название таблицы.         
+INTERSECT               - Объединение 2х таблиц.          
+SELECT country          - Выбор поля.
+FROM employee;          - Название таблицы.
+```
+### EXCEPT. Исключение.
+```postgresql
+Выводит страны которые есть в customers но нету в employee.
+
+SELECT country          - Выбор поля.
+FROM customers          - Название таблицы.         
+EXCEPT                  - Объединение 2х таблиц.          
+SELECT country          - Выбор поля.
+FROM employee;          - Название таблицы.
 ```
 ### END
