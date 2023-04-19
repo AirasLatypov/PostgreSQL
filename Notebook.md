@@ -12,13 +12,13 @@ DATE - Дата.
 ```
 ---
 ## Запросы. SELECT.
-### **- Выводит все поля таблицы.**
+### **Выводит все поля таблицы.**
 
 ```postgresql
 SELECT * FROM table; 
 ```
 ---
-### **- Выводит запрошенное поле таблицы.**
+### **Выводит запрошенное поле таблицы.**
 ```postgresql
 SELECT (название поля) FROM table;
 ```
@@ -38,7 +38,7 @@ SELECT DISTINCT (название поля) FROM table;
 SELECT COUNT (название поля) FROM table; 
 ```
 ---
-### **- Объеденить дубли и подсчитать количество строк.**
+### **Объеденить дубли и подсчитать количество строк.**
 ```postgresql
 SELECT COUNT (DISTINCT название поля) FROM table; 
 ```
@@ -123,7 +123,10 @@ ADD ИМЯ_НОВОГО_ПОЛЯ ТИП_ДАННЫХ;
 ### **DELETE. Удаление данных в таблице.**
 ```postgresql
 DELETE FROM Products
-WHERE Manufacturer='Apple';  - Например, удалим строки, у которых производитель - Apple.
+WHERE Manufacturer = 'Apple';       - Например, удалим строки, у которых производитель - Apple.
+
+DELETE FROM Customers 
+WHERE First_Name = 'Airas';         - Например, удалим строку где имя заказчика Airas.
 ```
 ---
 ### **DROP TABLE. Удаление таблицы.**
